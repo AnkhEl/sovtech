@@ -53,6 +53,6 @@
     "apollo": "^2.30.2"
   },
   "main": "src/index.js",
-  "author": "Raphael Terrier @R4ph-t",
+  "author": "Themba Alex Khumalo",
   "license": "MIT"
 }
