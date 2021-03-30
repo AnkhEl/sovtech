@@ -5,7 +5,7 @@ This is my solution for the Sovtech Assessment
 
 ## Run the project
 
-Catstronauts full-stack app holds two main folders `server` and `client`.
+This app holds two main folders `server` and `client`.
 
 ### server
 
