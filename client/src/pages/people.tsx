@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Layout } from '../components';
 import { gql, useQuery } from '@apollo/client';
 import PersonCard from '../containers/person-card';
 import QueryResult from '../components/query-result'
 import ReactPaginate from "react-paginate";
+// eslint-disable-next-line
+import { RouteComponentProps } from "@reach/router";
+import {PersonContext} from '../personContext';
 
 
 const PEOPLE = gql`
- query ExampleQuery($pageNum: Int) {
+ query PeoplQuery($pageNum: Int) {
   searchByPage(pageNum: $pageNum) {
     name
     birth_year
@@ -24,22 +27,24 @@ const PEOPLE = gql`
 }
 `
 
-const People = () => {
-  const [currentPage, setCurrentPage] = useState(0);
 
+//NB I am adding RouteComponentProps in order to to pass in the path prop from @reach/route
+const People = (_,RouteComponentProps) => {
+  //const [currentPage, setCurrentPage] = useState(0);
+  const {currentPageNum, setCurrentPageNum} = useContext(PersonContext)
 
   const { loading, error, data, refetch } = useQuery(PEOPLE, {
     variables: {
-      pageNum: currentPage
+      pageNum: currentPageNum
     }
   });
 
  
   const handlePageClick = ({ selected: selectedPage }) => {
 
-    setCurrentPage(selectedPage);
+    setCurrentPageNum(selectedPage);
     refetch({ 
-      pageNum: currentPage 
+      pageNum: currentPageNum 
     }); 
   }
   
@@ -55,6 +60,7 @@ const People = () => {
        <div style={{ flexBasis: "100%",height: 0, width:0}}> 
 
       <ReactPaginate
+        initialPage={currentPageNum}
         previousLabel={"← Previous"}
         nextLabel={"Next →"}
         pageCount={9}

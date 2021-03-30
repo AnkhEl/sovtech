@@ -1,13 +1,15 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import styled from '@emotion/styled';
 import {
   colors,
 } from '../styles';
-
 import {useParams } from '@reach/router';
 import ContentSection from './content-section';
 import { gql, useQuery } from '@apollo/client';
 import QueryResult from './query-result';
+// eslint-disable-next-line
+import { RouteComponentProps } from "@reach/router";
+import {PersonContext} from '../personContext';
 
 
 /**
@@ -16,10 +18,11 @@ import QueryResult from './query-result';
  */
 
 
-const PersonDetail = () => {
+const PersonDetail = (_,RouteComponentProps) => {
 
   const {name} = useParams();
-  
+  const {handleHomeClick,handlePreviousClick} = useContext(PersonContext);
+
   const PERSON = gql`
     query Query($name: String) {
       searchByName(name: $name) {
@@ -113,7 +116,10 @@ const PersonDetail = () => {
                 <DetailRow>
                   <DetailItem></DetailItem>
                   <DetailItem>
-                        <button onClick={()=>window.history.back()}>Home</button>
+                      <ButtonContainer style={{flexDirection:"row"}}>
+                        <button onClick={handlePreviousClick}>previous</button>
+                        <button onClick={handleHomeClick}>Home</button>
+                      </ButtonContainer>
                   </DetailItem>
                   <DetailItem></DetailItem>
                 </DetailRow>
@@ -136,6 +142,14 @@ const CoverImage = styled.img({
   marginBottom: 0,
   height: 400
 });
+
+const ButtonContainer = styled.span({
+  flexDirection:"row",
+  button:{
+    marginRight:10,
+    borderRadius:2,
+  }
+})
 
 const PersonDetails = styled.div({
   display: 'flex',

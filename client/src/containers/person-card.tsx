@@ -6,15 +6,23 @@ import { Link } from '@reach/router';
 /**
  * PersonCard  component renders basic info in a card format
  */
-const PersonCard = ({ person }) => {
+
+interface PersonCardProps{
+ person:{
+     name:string;
+     gender:string;
+     birth_year:string;
+ }
+}
+const PersonCard = ({ person }:PersonCardProps) => {
     const {
-        name,
+        name, 
         gender,
         birth_year,
     } = person;
 
     const photo = 'https://images.unsplash.com/photo-1542648748-bbeaf3cec462?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1190&q=80';
-    const thumbnail = 'https://res.cloudinary.com/dety84pbu/image/upload/v1598465568/nebula_cat_djkt9r.jpg';
+    const thumbnail = 'https://images.unsplash.com/photo-1579566346927-c68383817a25?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80';
 
     return (
         <CardContainer>
@@ -121,8 +129,8 @@ const CardBody = styled.div({
 
 const CardFooter = styled.div({
     display: 'flex',
-    flexDirection: 'Row',
-    marginTop: '4rem',
+    flexDirection: "row",
+    marginTop: "4rem",
 });
 
 const AuthorImage = styled.img({

@@ -4,8 +4,10 @@ import styled from '@emotion/styled';
 import { Link } from '@reach/router';
 import logo from '../assets/sovtech_logo-2.png';
 
-
-const Header = ({ children }) => {
+interface HeaderProps{
+  children?:JSX.Element;
+}
+const Header = ({ children }:HeaderProps) => {
   return (
     <HeaderBar>
       <Container>

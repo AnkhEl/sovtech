@@ -2,10 +2,13 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { widths, colors } from '../styles';
 
+interface ContentSectionProps{
+  children:React.ReactNode;
+}
 /**
  * Content Section component renders content (mainly text/mdown based)
  */
-const ContentSection = ({ children }) => {
+const ContentSection = ({ children }:ContentSectionProps) => {
   return <ContentDiv>{children}</ContentDiv>;
 };
 

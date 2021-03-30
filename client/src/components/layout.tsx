@@ -4,7 +4,13 @@ import styled from '@emotion/styled';
 import { widths, unit } from '../styles';
 import '../pagination.css';
 
-const Layout = ({ fullWidth, children, grid }) => {
+interface LayoutProps{
+  fullWidth?: boolean;
+  children: React.ReactNode| JSX.Element| React.ReactElement;
+  grid?:boolean;
+}
+
+const Layout = ({ fullWidth, children, grid }:LayoutProps) => {
   return (
     <>
       <Header />
@@ -18,7 +24,12 @@ const Layout = ({ fullWidth, children, grid }) => {
 
 export default Layout;
 
-const PageContainer = styled.div((props) => ({
+type PageContainerProps = {
+  fullWidth?:boolean;
+  grid?:boolean;
+}
+// @ts-ignore
+const PageContainer = styled.div((props:PageContainerProps) => ({
   display: 'flex',
   justifyContent: props.grid ? 'center' : 'top',
   flexDirection: props.grid ? 'row' : 'column',
